@@ -1,0 +1,115 @@
+﻿<Window x:Class="CS3280GroupAssignment.wndMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CS3280GroupAssignment"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="1">
+            <MenuItem Header="Search" Click="MenuItem_Click"/>
+            <MenuItem Header="Edit Items" Click="MenuItem_Click_1"/>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header="Invoice Info" Margin="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Invoice Number :"/>
+                        <TextBox x:Name="TBInvoice" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="10,5,10,5"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Total Cost :"/>
+                        <Label x:Name="lblTotalCost" Grid.Row="1" Grid.Column="1" Content="$0"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Invoice Date :"/>
+                        <DatePicker Grid.Row="2" Grid.Column="1" x:Name="DpDatePicker" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox x:Name="GBInvoiceControl" Grid.Row="1" Header="Invoice Control" Margin="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" x:Name="btnEditInvoice" Content="Edit Invoice" Margin="3,4,0,4" Click="btnEditInvoice_Click"/>
+                        <Button Grid.Column="1" x:Name="btnSaveInvoice" Content="Save Invoice" Margin="0,4,0,4" Click="btnSaveInvoice_Click"/>
+                        <Button Grid.Column="2" x:Name="btnAddInvoice" Content="Add Invoice" Margin="0,4,3,4" Click="btnAddInvoice_Click"/>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox x:Name="GBItemControl" Grid.Row="2" Header="Item Control" Margin="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox Grid.Column="0" x:Name="cbItems" Margin="5,4,0,0" SelectionChanged="cbItems_SelectionChanged"/>
+                            <TextBox Grid.Column="1" x:Name="tbItemCost" IsReadOnly="True" Margin="0,4,5,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" x:Name="btnAddItem" Content="Add Item" Margin="10,7,0,5" Click="btnAddItem_Click"/>
+                            <Button Grid.Column="1" x:Name="btnRemoveItem" Content="Remove Item" Margin="0,7,10,5" Click="btnRemoveItem_Click" />
+
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <GroupBox Grid.Row="1" Header="Items on Invoice" Margin="4" Padding="4">
+                    <DataGrid x:Name="dgItems" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=ItemCode}" Header="Item Code" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Path=ItemDesc}" Header="Item Description"/>
+                            <DataGridTextColumn Binding="{Binding Path=Cost}" Header="Item Cost"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
